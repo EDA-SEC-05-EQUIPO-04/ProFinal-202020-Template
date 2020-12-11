@@ -48,6 +48,41 @@ operación seleccionada.
 #  Menu principal
 # ___________________________________________________
 
+def printMenu():
+    print("\n")
+    print("*******************************************")
+    print("Bienvenido")
+    print("1- Inicializar Analizador")
+    print("2- Cargar información")
+    print("R1- Requerimiento 1")
+    print("R2- Requerimiento 2")
+    print("R3- Requerimiento 3")
+    print("0- Salir")
+    print("*******************************************")
+
+def printRespuesta():
+    print("---------------------------------------------------")
 """
 Menu principal
 """
+while True:
+    printMenu()
+    inputs = input('Seleccione una opción para continuar\n>')
+
+    if  inputs[0] == "1":
+        pass
+    
+    elif inputs[0] == "2":
+        pass
+
+    elif inputs == "R1":
+        pass
+    
+    elif inputs == "R2":
+        pass
+
+    elif inputs == "R3":
+        pass
+
+    else:
+        sys.exit(0)
