@@ -103,6 +103,7 @@ def printmenuarchivos():
     print("1- Grande (1 Gb)")
     print("2- Mediano (100 Mb)")
     print("3- Pequeño (25 Mb)")
+
 def printRespuesta():
     print("---------------------------------------------------")
 """

@@ -1,8 +1,9 @@
-#ISIS1225 - Estructura de un proyecto
+# ISIS1225-Proyecto Final
+## Rafael Córdoba López        Código:201630880 Correo:rf.cordoba@uniandes.edu.co
+###
+## Jaime Andres Torres Bermejo Código:202014866 Correo:j.torres16@uniandes.edu.co 
+### 
 
-Este proyecto busca mostrar una posible forma de organizar el código que se va a desarrollar en los proyectos del curso.
-
-Esta organización es una sugerencia que puede ser adaptada a  las necesidades y gustos de cada persona.
 
 La estructura tiene los siguiente directorios y archivos:
 
