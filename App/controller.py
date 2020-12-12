@@ -63,6 +63,17 @@ def loadData(analyzer, accidents_file):
 # ___________________________________________________
 #  Funciones para consultas
 # ___________________________________________________
+
+def firstRequirement(analyzer):
+    return model.firstRequirement(analyzer)
+
+def secondRequirement(cont):
+    return model.secondRequirement(cont)
+
+def thirdRequirement(cont):
+    return model.thirdRequirement(cont)
+
+
 def totalConnections(analyzer):
     """
     Total de enlaces entre las paradas
@@ -74,7 +85,7 @@ def totalStops(analyzer):
     Total de paradas de autobus
     """
     return model.totalStops(analyzer)
-    
+
 def tripsSize(analyzer):
     """
     Numero de accidentes leidos

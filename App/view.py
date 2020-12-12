@@ -78,13 +78,13 @@ def optionLoad():
     printRespuesta()
 
 def optionOne():
-    return None
+    return controller.firstRequirement(cont)
 
 def optionTwo():
-    return None
+    return controller.secondRequirement(cont)
 
 def optionThree():
-    return None
+    return controller.thirdRequirement(cont)
 
 def printMenu():
     print("\n")

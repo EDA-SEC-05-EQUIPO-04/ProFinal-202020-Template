@@ -115,6 +115,16 @@ def addStation(taxis, stationid):
 # ==============================
 # Funciones de consulta
 # ==============================
+def firstRequirement(analyzer):
+    return None
+
+def secondRequirement(analyzer):
+    return None
+
+def thirdRequirement(analyzer):
+    return None
+
+
 def totalStops(analyzer):
     """
     Retorna el total de estaciones (vertices) del grafo
