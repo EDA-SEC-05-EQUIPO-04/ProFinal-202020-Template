@@ -40,13 +40,51 @@ operación seleccionada.
 """
 
 # ___________________________________________________
+#  Ruta a los archivos
+# ___________________________________________________
+
+
+
+taxi_file = 'taxi-trips-wrvz-psew-subset-small'
+
+def asignFile(i=3):
+    if i=="1":
+        return 'taxi-trips-wrvz-psew-subset-large.csv'
+    if i=="2":
+        return 'taxi-trips-wrvz-psew-subset-medium.csv'
+    else:
+        return 'taxi-trips-wrvz-psew-subset-small.csv'
+   
+# ___________________________________________________
 #  Variables
 # ___________________________________________________
 
-
+initialStation = None
+recursionLimit = 20000
 # ___________________________________________________
 #  Menu principal
 # ___________________________________________________
+def optionLoad():
+    printRespuesta()
+    print("\nCargando información de taxis...")
+    controller.loadData(cont, taxi_file)
+    numedges = controller.totalConnections(cont)
+    numvertex = controller.totalStops(cont)
+    print('Numero de vertices: ' + str(numvertex))
+    print('Numero de arcos: ' + str(numedges))
+    print('El limite de recursion actual: ' + str(sys.getrecursionlimit()))
+    sys.setrecursionlimit(recursionLimit)
+    print('El limite de recursion se ajusta a: ' + str(recursionLimit))
+    printRespuesta()
+
+def optionOne():
+    return None
+
+def optionTwo():
+    return None
+
+def optionThree():
+    return None
 
 def printMenu():
     print("\n")
@@ -60,6 +98,11 @@ def printMenu():
     print("0- Salir")
     print("*******************************************")
 
+def printmenuarchivos():
+    print("¿Que tamaño de archivos desea cargar?")
+    print("1- Grande (1 Gb)")
+    print("2- Mediano (100 Mb)")
+    print("3- Pequeño (25 Mb)")
 def printRespuesta():
     print("---------------------------------------------------")
 """
@@ -70,19 +113,39 @@ while True:
     inputs = input('Seleccione una opción para continuar\n>')
 
     if  inputs[0] == "1":
-        pass
-    
+        printRespuesta()
+        printmenuarchivos()
+        taxi_file=asignFile(input(""))
+        print(taxi_file)
+        printRespuesta()
+        print("\nInicializando....")
+        # cont es el controlador que se usará de acá en adelante
+        cont = controller.init()
+        printRespuesta()
+
     elif inputs[0] == "2":
-        pass
+        printRespuesta()
+        executiontime = timeit.timeit(optionLoad, number=1)
+        print("Tiempo de ejecución: " + str(executiontime))
+        printRespuesta()
 
     elif inputs == "R1":
-        pass
+        printRespuesta()
+        executiontime = timeit.timeit(optionOne, number=1)
+        print("Tiempo de ejecución: " + str(executiontime))
+        printRespuesta()
     
     elif inputs == "R2":
-        pass
+        printRespuesta()
+        executiontime = timeit.timeit(optionTwo, number=1)
+        print("Tiempo de ejecución: " + str(executiontime))
+        printRespuesta()
 
     elif inputs == "R3":
-        pass
+        printRespuesta()
+        executiontime = timeit.timeit(optionThree, number=1)
+        print("Tiempo de ejecución: " + str(executiontime))
+        printRespuesta()
 
     else:
         sys.exit(0)

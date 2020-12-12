@@ -39,13 +39,44 @@ recae sobre el controlador.
 # ___________________________________________________
 #  Inicializacion del catalogo
 # ___________________________________________________
-
+def init():
+    """
+    Llama la funcion de inicializacion del modelo.
+    """
+    analyzer = model.newAnalyzer()
+    return analyzer
 
 # ___________________________________________________
 #  Funciones para la carga de datos y almacenamiento
 #  de datos en los modelos
 # ___________________________________________________
-
+def loadData(analyzer, accidents_file):
+    """
+    Carga los datos de los archivos CSV en el modelo
+    """
+    accidents_file = cf.data_dir + accidents_file
+    input_file = csv.DictReader(open(accidents_file, encoding="utf-8"),
+                                delimiter=",")
+    for accidente in input_file:
+        model.addTrip(analyzer, accidente)
+    return analyzer
 # ___________________________________________________
 #  Funciones para consultas
 # ___________________________________________________
+def totalConnections(analyzer):
+    """
+    Total de enlaces entre las paradas
+    """
+    return model.totalConnections(analyzer)
+
+def totalStops(analyzer):
+    """
+    Total de paradas de autobus
+    """
+    return model.totalStops(analyzer)
+    
+def tripsSize(analyzer):
+    """
+    Numero de accidentes leidos
+    """
+    return model.tripsSize(analyzer)
