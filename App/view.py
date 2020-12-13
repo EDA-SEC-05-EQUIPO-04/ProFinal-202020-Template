@@ -27,10 +27,11 @@
 
 import sys
 import config
+from DISClib.ADT import list as lt
+from DISClib.ADT import map as mp
 from App import controller
-from DISClib.ADT import stack
-import timeit
 assert config
+import timeit
 
 """
 La vista se encarga de la interacción con el usuario.
@@ -43,48 +44,14 @@ operación seleccionada.
 #  Ruta a los archivos
 # ___________________________________________________
 
+pequeno = 'taxi-trips-wrvz-psew-subset-small.csv'
+mediano = 'taxi-trips-wrvz-psew-subset-medium.csv'
+grande = 'taxi-trips-wrvz-psew-subset-large.csv'
 
-
-taxi_file = 'taxi-trips-wrvz-psew-subset-small'
-
-def asignFile(i=3):
-    if i=="1":
-        return 'taxi-trips-wrvz-psew-subset-large.csv'
-    if i=="2":
-        return 'taxi-trips-wrvz-psew-subset-medium.csv'
-    else:
-        return 'taxi-trips-wrvz-psew-subset-small.csv'
-   
-# ___________________________________________________
-#  Variables
-# ___________________________________________________
-
-initialStation = None
-recursionLimit = 20000
 # ___________________________________________________
 #  Menu principal
 # ___________________________________________________
-def optionLoad():
-    printRespuesta()
-    print("\nCargando información de taxis...")
-    controller.loadData(cont, taxi_file)
-    numedges = controller.totalConnections(cont)
-    numvertex = controller.totalStops(cont)
-    print('Numero de vertices: ' + str(numvertex))
-    print('Numero de arcos: ' + str(numedges))
-    print('El limite de recursion actual: ' + str(sys.getrecursionlimit()))
-    sys.setrecursionlimit(recursionLimit)
-    print('El limite de recursion se ajusta a: ' + str(recursionLimit))
-    printRespuesta()
 
-def optionOne():
-    return controller.firstRequirement(cont)
-
-def optionTwo():
-    return controller.secondRequirement(cont)
-
-def optionThree():
-    return controller.thirdRequirement(cont)
 
 def printMenu():
     print("\n")
@@ -98,14 +65,26 @@ def printMenu():
     print("0- Salir")
     print("*******************************************")
 
-def printmenuarchivos():
-    print("¿Que tamaño de archivos desea cargar?")
-    print("1- Grande (1 Gb)")
-    print("2- Mediano (100 Mb)")
-    print("3- Pequeño (25 Mb)")
+def optionTwo():
+    print("\nCargando información de taxis....")
+    if archivo == 1:
+       controller.loadData(cont, pequeno)
+    elif archivo == 2:
+        controller.loadData(cont, mediano)
+    elif archivo == 3:
+        controller.loadData(cont, grande)  
 
-def printRespuesta():
-    print("---------------------------------------------------")
+
+def optionThree():
+    return controller.firstRequirement(cont)
+
+def optionFour():
+    res = controller.secondRequirement(cont, initialDate, finalDate, int(num_taxis))
+    print("Taxis con más puntos: ", res)
+
+def optionFive():
+    return controller.thirdRequirement(cont)
+
 """
 Menu principal
 """
@@ -113,40 +92,36 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n>')
 
-    if  inputs[0] == "1":
-        printRespuesta()
-        printmenuarchivos()
-        taxi_file=asignFile(input(""))
-        print(taxi_file)
-        printRespuesta()
+    if inputs[0] == "1":
         print("\nInicializando....")
-        # cont es el controlador que se usará de acá en adelante
         cont = controller.init()
-        printRespuesta()
 
     elif inputs[0] == "2":
-        printRespuesta()
-        executiontime = timeit.timeit(optionLoad, number=1)
-        print("Tiempo de ejecución: " + str(executiontime))
-        printRespuesta()
-
-    elif inputs == "R1":
-        printRespuesta()
-        executiontime = timeit.timeit(optionOne, number=1)
-        print("Tiempo de ejecución: " + str(executiontime))
-        printRespuesta()
-    
-    elif inputs == "R2":
-        printRespuesta()
+        print("¿Que tamaño de archivos desea cargar?")
+        print("1- Pequeño (25 Mb)")
+        print("2- Mediano (100 Mb)")
+        print("3- Grande (1 Gb)")
+        archivo = int(input("Escriba el numero correspondiente al archivo a utilizar: "))
         executiontime = timeit.timeit(optionTwo, number=1)
         print("Tiempo de ejecución: " + str(executiontime))
-        printRespuesta()
 
-    elif inputs == "R3":
-        printRespuesta()
+    elif inputs == "R1":
+
         executiontime = timeit.timeit(optionThree, number=1)
         print("Tiempo de ejecución: " + str(executiontime))
-        printRespuesta()
 
+    elif inputs == "R2":
+        initialDate = input("Introduzca la fecha inicial (Formato: AA-MM-DD): ")
+        finalDate = input("Introduzca la fecha final ó deje el espacio en blanco si no desea agregar una fecha final: ")
+        if finalDate == "":
+           finalDate = initialDate 
+        num_taxis = input("Número de taxis a retornar con más puntos: ")
+        executiontime = timeit.timeit(optionFour, number=1)
+        print("Tiempo de ejecución: " + str(executiontime))
+
+    elif int(inputs[0]) == "R3":
+        executiontime = timeit.timeit(optionFive, number=1)
+        print("Tiempo de ejecución: " + str(executiontime))
     else:
         sys.exit(0)
+sys.exit(0)
