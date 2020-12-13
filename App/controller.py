@@ -28,6 +28,7 @@ import config as cf
 from App import model
 import csv
 
+
 """
 El controlador se encarga de mediar entre la vista y el modelo.
 Existen algunas operaciones en las que se necesita invocar
@@ -39,27 +40,38 @@ recae sobre el controlador.
 # ___________________________________________________
 #  Inicializacion del catalogo
 # ___________________________________________________
+
+
 def init():
     """
-    Llama la funcion de inicializacion del modelo.
+    Llama la funcion de inicializacion.
     """
     analyzer = model.newAnalyzer()
     return analyzer
+
 
 # ___________________________________________________
 #  Funciones para la carga de datos y almacenamiento
 #  de datos en los modelos
 # ___________________________________________________
-def loadData(analyzer, accidents_file):
+
+def loadData(analyzer, tripsfile):
     """
-    Carga los datos de los archivos CSV en el modelo
+    Carga los datos de los archivos en el modelo
     """
-    accidents_file = cf.data_dir + accidents_file
-    input_file = csv.DictReader(open(accidents_file, encoding="utf-8"),
+    loadTrips(analyzer, tripsfile)
+
+
+def loadTrips(analyzer, tripsfile):
+    """
+    """
+    tripsfile = cf.data_dir + tripsfile
+    input_file = csv.DictReader(open(tripsfile, encoding="utf-8"),
                                 delimiter=",")
-    for accidente in input_file:
-        model.addTrip(analyzer, accidente)
-    return analyzer
+    for trip in input_file:
+        model.addTrips(analyzer, trip)
+
+
 # ___________________________________________________
 #  Funciones para consultas
 # ___________________________________________________
@@ -67,27 +79,9 @@ def loadData(analyzer, accidents_file):
 def firstRequirement(analyzer):
     return model.firstRequirement(analyzer)
 
-def secondRequirement(cont):
-    return model.secondRequirement(cont)
+def secondRequirement(analyzer, initialDate, finalDate, numN ):
+    taxipointsbyrange = model.secondRequirement(analyzer, initialDate, finalDate, numN)
+    return taxipointsbyrange
 
 def thirdRequirement(cont):
     return model.thirdRequirement(cont)
-
-
-def totalConnections(analyzer):
-    """
-    Total de enlaces entre las paradas
-    """
-    return model.totalConnections(analyzer)
-
-def totalStops(analyzer):
-    """
-    Total de paradas de autobus
-    """
-    return model.totalStops(analyzer)
-
-def tripsSize(analyzer):
-    """
-    Numero de accidentes leidos
-    """
-    return model.tripsSize(analyzer)
