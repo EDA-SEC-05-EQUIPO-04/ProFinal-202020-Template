@@ -149,7 +149,24 @@ def newTaxi(name):
 def firstRequirement(analyzer, m, n):
 
     lstcompanies = lt.newList(datastructure='SINGLE_LINKED', cmpfunction=None)
+#POR TAXIS
+
+    companies = analyzer["companies"]
+    iterador = it.newIterator(mp.valueSet(companies))
+    while it.hasNext(iterador):
+        x = it.next(iterador)
+        lt.addFirst(lstcompanies, (x["name"], lt.size(x["taxis"])))
     
+    ms.mergesort(lstcompanies, compareR1)
+
+    print("-----Por Número de taxis-----")
+    servicios = lt.subList(lstcompanies, 0, m)
+    iteradorserv = it.newIterator(servicios)
+    while it.hasNext(iteradorserv):
+        x = it.next(iteradorserv)
+        print("Compañía: ",x[0],", Taxis: ",x[1])
+        
+#POR COMPAÑIAS
 
     companies = analyzer["companies"]
     iterador = it.newIterator(mp.valueSet(companies))
@@ -158,7 +175,15 @@ def firstRequirement(analyzer, m, n):
         lt.addFirst(lstcompanies, (x["name"], x["numservices"]))
     
     ms.mergesort(lstcompanies, compareR1)
-    print lstcompanies
+
+    print("-----Por Servicios ofrecidos-----")
+    servicios = lt.subList(lstcompanies, 0, n)
+    iteradorserv = it.newIterator(servicios)
+    while it.hasNext(iteradorserv):
+        x = it.next(iteradorserv)
+        print("Compañía: ",x[0],", Servicios: ",x[1])
+
+ 
     
 
     return None
@@ -204,7 +229,7 @@ def compareR1(thing1, thing2):
     """
     if (thing1[1] == thing2[1]):
         return 0
-    elif (thing1[1] > thing2[1]):
+    elif (thing1[1] < thing2[1]):
         return 1
     else:
         return -1 
