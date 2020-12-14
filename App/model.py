@@ -155,9 +155,10 @@ def firstRequirement(analyzer, m, n):
     iterador = it.newIterator(mp.valueSet(companies))
     while it.hasNext(iterador):
         x = it.next(iterador)
-        lt.addFirst(lstcompanies, {x["name"]: x["numservices"]})
+        lt.addFirst(lstcompanies, (x["name"], x["numservices"]))
     
-
+    ms.mergesort(lstcompanies, compareR1)
+    print lstcompanies
     
 
     return None
@@ -196,6 +197,17 @@ def thirdRequirement(analyzer):
 # ==============================
 # Funciones de Comparacion
 # ==============================
+
+def compareR1(thing1, thing2):
+    """
+    Compara fechas
+    """
+    if (thing1[1] == thing2[1]):
+        return 0
+    elif (thing1[1] > thing2[1]):
+        return 1
+    else:
+        return -1 
 
 def compareDates(date1, date2):
     """
