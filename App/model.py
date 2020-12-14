@@ -165,19 +165,20 @@ def firstRequirement(analyzer, m, n):
     while it.hasNext(iteradorserv):
         x = it.next(iteradorserv)
         print("Compañía: ",x[0],", Taxis: ",x[1])
-        
-#POR COMPAÑIAS
+
+    lstservices = lt.newList(datastructure='SINGLE_LINKED', cmpfunction=None)
+#POR SERVICIOS
 
     companies = analyzer["companies"]
     iterador = it.newIterator(mp.valueSet(companies))
     while it.hasNext(iterador):
         x = it.next(iterador)
-        lt.addFirst(lstcompanies, (x["name"], x["numservices"]))
+        lt.addFirst(lstservices, (x["name"], x["numservices"]))
     
-    ms.mergesort(lstcompanies, compareR1)
+    ms.mergesort(lstservices, compareR1)
 
     print("-----Por Servicios ofrecidos-----")
-    servicios = lt.subList(lstcompanies, 0, n)
+    servicios = lt.subList(lstservices, 0, n)
     iteradorserv = it.newIterator(servicios)
     while it.hasNext(iteradorserv):
         x = it.next(iteradorserv)
