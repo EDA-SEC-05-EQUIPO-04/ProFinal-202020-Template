@@ -3,7 +3,8 @@
 ###
 ## Jaime Andres Torres Bermejo Código:202014866 Correo:j.torres16@uniandes.edu.co 
 ### 
-
+## Esteban Gonzalez Amaya Código:202010737 Correo:e.gonzaleza@uniandes.edu.co
+###
 
 La estructura tiene los siguiente directorios y archivos:
 
