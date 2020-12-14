@@ -167,6 +167,7 @@ def firstRequirement(analyzer, m, n):
         print("Compañía: ",x[0],", Taxis: ",x[1])
 
     lstservices = lt.newList(datastructure='SINGLE_LINKED', cmpfunction=None)
+    
 #POR SERVICIOS
 
     companies = analyzer["companies"]
