@@ -226,11 +226,11 @@ def thirdRequirement(analyzer):
 
 def compareR1(thing1, thing2):
     """
-    Compara fechas
+    Compara datos en tupla.
     """
-    if (thing1[1] == thing2[1]):
+    if (int(thing1[1]) == int(thing2[1])):
         return 0
-    elif (thing1[1] < thing2[1]):
+    elif (int(thing1[1]) > int(thing2[1])):
         return 1
     else:
         return -1 
