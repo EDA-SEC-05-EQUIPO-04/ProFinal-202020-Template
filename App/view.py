@@ -28,8 +28,20 @@
 import sys
 import config
 from App import controller
+from App import model
 from DISClib.ADT import stack
 import timeit
+import datetime
+from datetime import timedelta  
+from DISClib.ADT import map as m
+from DISClib.DataStructures import mapentry as me
+from DISClib.DataStructures import listiterator as it
+from DISClib.ADT import orderedmap as om
+from DISClib.ADT.graph import gr
+from DISClib.Algorithms.Graphs import scc
+from DISClib.Algorithms.Graphs import dijsktra as djk
+from DISClib.Algorithms.Graphs import dfs
+from DISClib.ADT import list as lt
 assert config
 
 """
@@ -84,7 +96,31 @@ def optionTwo():
     return controller.secondRequirement(cont)
 
 def optionThree():
-    return controller.thirdRequirement(cont)
+    inicial=datetime.datetime.strptime(model.roundingtime(input("Ingrese su hora de inicio posible de viaje(hh:mm):\n"))+":00", '%H:%M:%S')
+    final=datetime.datetime.strptime(model.roundingtime(input("Ingrese su hora de fin posible de viaje(hh:mm):\n"))+":00", '%H:%M:%S')
+    inicio=input("Ingrese su area de inicio:\n")
+    llegada=input("Ingrese su area de llegada:\n")
+    controller.thirdRequirement(cont,inicio,llegada,inicial,final)
+
+
+
+
+
+
+
+def compareStopIds(stop, keyvaluestop):
+    """
+    Compara dos estaciones
+    """
+    stopcode = keyvaluestop['key']
+    if (stop == stopcode):
+        return 0
+    elif (stop > stopcode):
+        return 1
+    else:
+        return -1
+
+
 
 def printMenu():
     print("\n")
@@ -123,7 +159,7 @@ while True:
         # cont es el controlador que se usará de acá en adelante
         cont = controller.init()
         printRespuesta()
-
+        
     elif inputs[0] == "2":
         printRespuesta()
         executiontime = timeit.timeit(optionLoad, number=1)

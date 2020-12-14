@@ -70,8 +70,8 @@ def firstRequirement(analyzer):
 def secondRequirement(cont):
     return model.secondRequirement(cont)
 
-def thirdRequirement(cont):
-    return model.thirdRequirement(cont)
+def thirdRequirement(cont,inicio,llegada,inicial,final):
+    return model.thirdRequirement(cont,inicio,llegada,inicial,final)
 
 
 def totalConnections(analyzer):
