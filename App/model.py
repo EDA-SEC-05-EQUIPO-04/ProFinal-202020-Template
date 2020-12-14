@@ -30,6 +30,8 @@ from DISClib.ADT import list as lt
 from DISClib.ADT import map as mp
 from DISClib.ADT import orderedmap as om
 from DISClib.DataStructures import mapentry as me
+from DISClib.DataStructures import listiterator as it
+from DISClib.Algorithms.Sorting import mergesort as ms
 assert config
 
 
@@ -144,7 +146,48 @@ def newTaxi(name):
 # ==============================
 
 
-def firstRequirement(analyzer):
+def firstRequirement(analyzer, m, n):
+
+    lstcompanies = lt.newList(datastructure='SINGLE_LINKED', cmpfunction=None)
+#POR TAXIS
+
+    companies = analyzer["companies"]
+    iterador = it.newIterator(mp.valueSet(companies))
+    while it.hasNext(iterador):
+        x = it.next(iterador)
+        lt.addFirst(lstcompanies, (x["name"], lt.size(x["taxis"])))
+    
+    ms.mergesort(lstcompanies, compareR1)
+
+    print("-----Por Número de taxis-----")
+    servicios = lt.subList(lstcompanies, 0, m)
+    iteradorserv = it.newIterator(servicios)
+    while it.hasNext(iteradorserv):
+        x = it.next(iteradorserv)
+        print("Compañía: ",x[0],", Taxis: ",x[1])
+
+    lstservices = lt.newList(datastructure='SINGLE_LINKED', cmpfunction=None)
+    
+#POR SERVICIOS
+
+    companies = analyzer["companies"]
+    iterador = it.newIterator(mp.valueSet(companies))
+    while it.hasNext(iterador):
+        x = it.next(iterador)
+        lt.addFirst(lstservices, (x["name"], x["numservices"]))
+    
+    ms.mergesort(lstservices, compareR1)
+
+    print("-----Por Servicios ofrecidos-----")
+    servicios = lt.subList(lstservices, 0, n)
+    iteradorserv = it.newIterator(servicios)
+    while it.hasNext(iteradorserv):
+        x = it.next(iteradorserv)
+        print("Compañía: ",x[0],", Servicios: ",x[1])
+
+ 
+    
+
     return None
 
 def secondRequirement(chicago, initialDate, finalDate, numN):
@@ -181,6 +224,17 @@ def thirdRequirement(analyzer):
 # ==============================
 # Funciones de Comparacion
 # ==============================
+
+def compareR1(thing1, thing2):
+    """
+    Compara datos en tupla.
+    """
+    if (int(thing1[1]) == int(thing2[1])):
+        return 0
+    elif (int(thing1[1]) > int(thing2[1])):
+        return 1
+    else:
+        return -1 
 
 def compareDates(date1, date2):
     """

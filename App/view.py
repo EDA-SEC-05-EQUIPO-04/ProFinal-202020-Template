@@ -45,6 +45,8 @@ operación seleccionada.
 # ___________________________________________________
 
 pequeno = 'taxi-trips-wrvz-psew-subset-small.csv'
+mediano = 'taxi-trips-wrvz-psew-subset-medium.csv'
+grande = 'taxi-trips-wrvz-psew-subset-large.csv'
 
 # ___________________________________________________
 #  Menu principal
@@ -66,7 +68,11 @@ def printMenu():
 def optionTwo():
     print("\nCargando información de taxis....")
     if archivo == 1:
-       controller.loadData(cont, pequeno)   
+       controller.loadData(cont, pequeno)
+    elif archivo == 2:
+        controller.loadData(cont, mediano)
+    elif archivo == 3:
+        controller.loadData(cont, grande)  
 
 
 def optionThree():
@@ -74,7 +80,12 @@ def optionThree():
 
 def optionFour():
     res = controller.secondRequirement(cont, initialDate, finalDate, int(num_taxis))
-    print("Taxis con más puntos: ", res)
+    i = 0
+    print("Taxis con más puntos: ")
+    while i < int(num_taxis):
+        print("id taxi: "+ str(res[i][0]) + " puntos: " + str(res[i][1]))
+        i += 1
+
 
 def optionFive():
     return controller.thirdRequirement(cont)
@@ -100,6 +111,7 @@ while True:
         print("Tiempo de ejecución: " + str(executiontime))
 
     elif inputs == "R1":
+
         executiontime = timeit.timeit(optionThree, number=1)
         print("Tiempo de ejecución: " + str(executiontime))
 

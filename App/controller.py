@@ -77,7 +77,9 @@ def loadTrips(analyzer, tripsfile):
 # ___________________________________________________
 
 def firstRequirement(analyzer):
-    return model.firstRequirement(analyzer)
+    m= int(input("Top M de compañías por taxis: "))
+    n= int(input("Top N de compañías por servicios: "))
+    return model.firstRequirement(analyzer, m, n)
 
 def secondRequirement(analyzer, initialDate, finalDate, numN ):
     taxipointsbyrange = model.secondRequirement(analyzer, initialDate, finalDate, numN)
