@@ -31,6 +31,7 @@ from DISClib.ADT import map as mp
 from DISClib.ADT import orderedmap as om
 from DISClib.DataStructures import mapentry as me
 from DISClib.DataStructures import listiterator as it
+from DISClib.Algorithms.Sorting import mergesort as ms
 assert config
 
 
@@ -147,6 +148,17 @@ def newTaxi(name):
 
 def firstRequirement(analyzer, m, n):
 
+    lstcompanies = lt.newList(datastructure='SINGLE_LINKED', cmpfunction=None)
+    
+
+    companies = analyzer["companies"]
+    iterador = it.newIterator(mp.valueSet(companies))
+    while it.hasNext(iterador):
+        x = it.next(iterador)
+        lt.addFirst(lstcompanies, {x["name"]: x["numservices"]})
+    
+
+    
 
     return None
 
